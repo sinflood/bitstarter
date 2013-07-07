@@ -11,7 +11,7 @@ References:
    - http://encosia.com/cheerio-faster-windows-friendly-alternative-jsdom/
    - http://maxogden.com/scraping-with-node.html
 
- + commander.js
+ + commander.jshttps://github.com/MatthewMueller/cheerio
    - https://github.com/visionmedia/commander.js
    - http://tjholowaychuk.com/post/9103188408/commander-js-nodejs-command-line-interfaces-made-easy
 
@@ -24,9 +24,10 @@ References:
 var fs = require('fs');
 var program = require('commander');
 var cheerio = require('cheerio');
-var HTMLFILE_DEFAULT = "index.html";
+var rest = require("restler");
+//var HTMLFILE_DEFAULT = "index.html";
 var CHECKSFILE_DEFAULT = "checks.json";
-
+var URL_DEFAULT = "www.google.com";
 var assertFileExists = function(infile) {
     var instr = infile.toString();
     if(!fs.existsSync(instr)) {
@@ -36,8 +37,13 @@ var assertFileExists = function(infile) {
     return instr;
 };
 
+var assertPageExists = function(site){
+    var inPage = site.toString();
+    return inPage;
+}
+
 var cheerioHtmlFile = function(htmlfile) {
-    return cheerio.load(fs.readFileSync(htmlfile));
+    return cheerio.load(htmlfile);
 };
 
 var loadChecks = function(checksfile) {
@@ -52,6 +58,9 @@ var checkHtmlFile = function(htmlfile, checksfile) {
         var present = $(checks[ii]).length > 0;
         out[checks[ii]] = present;
     }
+
+    var msg =JSON.stringify(out, null, 4);
+    console.log(msg);
     return out;
 };
 
@@ -63,12 +72,30 @@ var clone = function(fn) {
 
 if(require.main == module) {
     program
-        .option('-c, --checks <check_file>', 'Path to checks.json', clone(assertFileExists), CHECKSFILE_DEFAULT)
-        .option('-f, --file <html_file>', 'Path to index.html', clone(assertFileExists), HTMLFILE_DEFAULT)
-        .parse(process.argv);
-    var checkJson = checkHtmlFile(program.file, program.checks);
-    var outJson = JSON.stringify(checkJson, null, 4);
-    console.log(outJson);
+        .option('-c, --checks <check_file>', 'Path to checks.json', clone(assertFileExists))
+        .option('-f, --file <html_file>', 'Path to index.html', clone(assertFileExists))
+        .option('-u, --url <url>', 'URL of index.html', clone(assertPageExists))
+	.parse(process.argv);
+    
+    if(program.file){
+	console.log("Starting file version " + program.file);
+	var f=fs.readFileSync(program.file);
+	checkHtmlFile(f, program.checks);
+    }	
+    else if(program.url){
+	console.log("starting URL version"+program.url );
+	var func = function(htmlfile ){
+	    checkHtmlFile(htmlfile, program.checks);
+	    };
+	rest.get(program.url).on('complete', func);
+    }
+    else{
+	console.log("missing file or url");
+    }	
+	
+    //r checkJson = checkHtmlFile(f, program.checks);
+  //var outJson = JSON.stringify(checkJson, null, 4);
+  //console.log(outJson);
 } else {
     exports.checkHtmlFile = checkHtmlFile;
 }
