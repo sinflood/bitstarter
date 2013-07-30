@@ -5,12 +5,12 @@ var express = require('express')
   , passport = require('passport')
   , basic_routes = require('./routes/basic')
   , user_routes = require('./routes/user');
-/*var fs = require("fs");
+var fs = require("fs");
 
 //var app = express.createServer(express.logger());
 var index = fs.readFileSync("views/index2.html");
 var home = fs.readFileSync("views/home.html");
-var about = fs.readFileSync("views/about.html");*/
+var about = fs.readFileSync("views/about.html");
 
 
 
@@ -22,7 +22,7 @@ app.configure(function() {
   app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(express.session({ secret: 'supersecretsecrets' }));
+  app.use(express.session({ secret: 'supersecretsauce' }));
   // Initialize Passport!  Also use passport.session() middleware, to support
   // persistent login sessions (recommended).
   app.use(passport.initialize());
@@ -33,7 +33,7 @@ app.configure(function() {
  
 });
 
-/*app.get('/index2.html', function(request, response) {
+app.get('/index2.html', function(request, response) {
   response.send(index.toString());
 });
 
@@ -43,7 +43,7 @@ app.get("/about.html", function(request, response){
 
 app.get("/home.html", function(request, response){
 	response.send(home.toString());
-});*/
+});
 
 app.get('/', basic_routes.index);
 
@@ -54,6 +54,7 @@ app.post('/login', user_routes.postlogin);
 app.get('/admin', pass.ensureAuthenticated, pass.ensureAdmin(), user_routes.admin);
 app.get('/logout', user_routes.logout);
 
+app.post('/addemail', user_routes.postEmail);
 var port = process.env.PORT || 8080;
 app.listen(port, function() {
   console.log("Listening on " + port);

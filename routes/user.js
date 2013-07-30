@@ -45,6 +45,15 @@ exports.postlogin = function(req, res, next) {
   })(req, res, next);
 };
 
+exports.postemail = function(req, res, next){
+	if(!email){
+		req.session.messages = [info.message];
+		return res.redirect('/login');
+	}
+	return res.redirect('/');	
+
+
+};
 exports.logout = function(req, res) {
   req.logout();
   res.redirect('/');
