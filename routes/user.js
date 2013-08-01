@@ -132,11 +132,17 @@ exports.apiaddtp = function(req, res, next){
 
 	var username = req.param('username');
 	var tp = req.param('tp');
-	
-	//get user object from db
-	//add tp
-	//save user object
-	//return status
+	db.userModel.findOne({username:username}, function(err, user){
+		if(err) return res.json(403, {"status":"failed", message: err});
+		if(!user) return res.json(403, {"status":"failed", message:"Failed to locate User"});
+		user.tasteid = tp
+		
+		//save user object
+		user.save(function(err, user){
+			if(err) return res.json(403, {"status":"failed", message:err});
+			return res.json(200, {"status":"success"});
+		});
+	});	
 }
 
 exports.postemail = function(req, res, next){
