@@ -6,6 +6,7 @@
     "mongoose": "3.6.x",
     "commander": "2.0.x",
     "ejs":"0.8.x",
+    "bcrypt": "0.7.x",
     "passport-local": "0.1.x",
     "passport": "0.1.x"
   },
