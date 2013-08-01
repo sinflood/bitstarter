@@ -28,11 +28,11 @@ var userSchema = new Schema({
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true},
-  //accounttype: { type: String, required: true},
-  //card: { type: String, required: false},
-  //subscriptionvalid { type: String, required: false},
-  admin: { type: Boolean, required: true },
-  //tasteid: { type: String, required:true, unique:true},
+  accounttype: { type: String, required: true},
+  card: { type: String, required: false},
+  subscriptionvalid: { type: String, required: false},
+  //admin: { type: Boolean, required: true },
+  tasteid: { type: String, required:false, unique:true},
 });
 
 

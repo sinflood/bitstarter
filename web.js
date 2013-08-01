@@ -51,10 +51,14 @@ app.get('/', basic_routes.index);
 app.get('/account', pass.ensureAuthenticated, user_routes.account);
 app.get('/login', user_routes.getlogin);
 app.post('/login', user_routes.postlogin);
+app.post('/create', user_routes.postcreate)
+app.get('/create', user_routes.getcreate);
 app.get('/admin', pass.ensureAuthenticated, pass.ensureAdmin(), user_routes.admin);
 app.get('/logout', user_routes.logout);
-
-app.post('/addemail', user_routes.postEmail);
+app.post('/api/create', user_routes.apipostcreate);
+app.post('/api/login', user_routes.apipostlogin);
+app.post('/api/addtp', user_routes.apiaddtp);
+//app.post('/addemail', user_routes.postEmail);
 var port = process.env.PORT || 8080;
 app.listen(port, function() {
   console.log("Listening on " + port);
