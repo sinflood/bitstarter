@@ -32,7 +32,7 @@ var userSchema = new Schema({
   card: { type: String, required: false},
   subscriptionvalid: { type: String, required: false},
   //admin: { type: Boolean, required: true },
-  tasteid: { type: String, required:false, unique:true},
+  tasteid: { type: String, required:false},
 });
 
 
