@@ -12,7 +12,7 @@ var index = fs.readFileSync("views/index2.html");
 var home = fs.readFileSync("views/home.html");
 var about = fs.readFileSync("views/about.html");
 
-
+var ssindex = fs.readFileSync("index.html");
 
 // configure Express
 app.configure(function() {
@@ -35,6 +35,11 @@ app.configure(function() {
 
 app.get('/index2.html', function(request, response) {
   response.send(index.toString());
+});
+
+app.get('/ssindex.html', function(request, response){
+	response.send(ssindex.toString());
+
 });
 
 app.get("/about.html", function(request, response){
