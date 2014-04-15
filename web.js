@@ -50,7 +50,10 @@ app.get("/home.html", function(request, response){
 	response.send(home.toString());
 });
 
-app.get('/', basic_routes.index);
+app.get('/', function(request, response){
+	response.send(ssindex.toString());
+
+});
 
 // User pages
 app.get('/account', pass.ensureAuthenticated, user_routes.account);
