@@ -1156,7 +1156,79 @@ PARALLAX EFFECTS...........................1474
 		}
 		
 		/******************** CUSTOM BUTTONS *************************************/
-		
+.colored-line, .colored-line-left {
+background: #ea8825;
+}
+.colored-line {
+margin: auto;
+z-index: 1;
+width: 165px;
+height: 1px;
+}
+.section-header .section-description {
+display: inline-block;
+position: relative;
+text-align: center;
+padding-top: 10px;
+padding-bottom: 10px;
+}
+
+.section-header {
+text-align: center;
+padding-bottom: 78px;
+}
+.features .feature .icon-container .icon {
+border: 1px solid #ea8825;
+color: #ea8825;
+}
+
+		.features .feature .icon-container .icon {
+			width: 55px;
+			height: 55px;
+			border-radius: 50%;
+			line-height: 55px;
+			font-size: 18px;
+			text-align: center;
+			-webkit-transition: all ease-in 0.25s;
+			transition: all ease-in 0.25s;
+			-webkit-background-clip: padding-box;
+			-moz-background-clip: padding;
+			background-clip: padding-box;
+		}
+
+.features .phone-image {
+/*max-width: 250px;*/
+margin: auto;
+margin-bottom: 80px;
+}
+
+.features .feature .icon-container {
+display: block;
+min-height: 120px;
+margin-top: 5px;
+}
+.features .features-left .icon-container {
+float: right;
+margin-left: 20px;/*20px*/
+}
+.features .features-right .icon-container {
+float: left;
+margin-right: 60px;
+}
+
+.features .features-right {
+text-align: left;
+margin-top: 26px;
+margin-bottom: 80px;
+}
+.features .features-left {
+text-align: right;
+margin-top: 26px;
+margin-bottom: 80px;
+}
+.features .feature {
+margin-bottom: 40px;
+}
 		.btn-warning {
 		  background-color: hsl(27, 94%, 46%) !important;
 		  background-repeat: repeat-x;
